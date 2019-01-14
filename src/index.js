@@ -72,7 +72,7 @@ app.get('/build', (req, res) => {
   });
 });
 
-app.listen(config.PORT, () => {
+app.listen(process.env.PORT || config.PORT, () => {
   const log = console.log;
   log('\n');
   log(chalk.bgGreen.black(`Server listening on http://localhost:${config.PORT}/ ..`));
