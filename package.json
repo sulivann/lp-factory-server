@@ -1,0 +1,41 @@
+{
+  "name": "lp-factory-server",
+  "version": "1.0.0",
+  "description": "LP Factory Server",
+  "scripts": {
+    "clean": "rm -rf dist && mkdir dist && webpack",
+    "dev": "npm run clean && concurrently --kill-others \"webpack --watch\" \"forever -w ./dist/bundle.js\"",
+    "build": "NODE_ENV=prod webpack",
+    "lint": "eslint --ext .js",
+    "start": "npm run build && node dist/bundle.js"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.3",
+    "chalk": "^2.1.0",
+    "express": "^4.15.4",
+    "uuid": "^3.3.2"
+  },
+  "engines": {
+    "node": "8.11.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "concurrently": "^3.5.0",
+    "eslint": "^4.7.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "forever": "^0.15.3",
+    "path": "^0.12.7",
+    "webpack": "^3.6.0",
+    "webpack-node-externals": "^1.6.0"
+  }
+}
