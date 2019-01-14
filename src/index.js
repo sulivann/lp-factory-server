@@ -11,7 +11,7 @@ import config  from './config';
 
 const app = express();
 
-app.use('/', express.static(path.resolve(process.cwd(), 'public')));
+app.use('/', express.static(path.resolve(process.cwd(), 'src/public')));
 
 /**
  * Route serving home
@@ -46,12 +46,12 @@ app.get('/build', (req, res) => {
     const uuid = uuidv4();
 
     // Write a new directory based on timestamp
-    fs.mkdir(path.resolve(process.cwd(), `public/${uuid}`), err => {
+    fs.mkdir(path.resolve(process.cwd(), `src/public/${uuid}`), err => {
       if (err) {
         throw err;
       }
 
-      const pathToFile = path.resolve(process.cwd(), `public/${uuid}/index.html`);
+      const pathToFile = path.resolve(process.cwd(), `src/public/${uuid}/index.html`);
 
       // Write a new file with merged html
       fs.writeFile(pathToFile, mergedHtml, (err, data) => {
