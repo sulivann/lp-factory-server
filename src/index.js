@@ -11,7 +11,7 @@ import config  from './config';
 
 const app = express();
 
-app.use('/', express.static(path.resolve(process.cwd(), 'src/public')));
+app.use('/', express.static(path.resolve(__dirname, 'src/public')));
 
 /**
  * Route serving home
@@ -33,12 +33,12 @@ app.get('/build', (req, res) => {
   const reqArray = req.query.components.split(',');
 
   reqArray.forEach(component => {
-    files.push(path.resolve(process.cwd(), `src/components/${component}.html`));
+    files.push(path.resolve(__dirname, `src/components/${component}.html`));
   });
 
   // Head and end of file
-  files.unshift(path.resolve(process.cwd(), 'src/components/head.html'));
-  files.push(path.resolve(process.cwd(), 'src/components/end.html'));
+  files.unshift(path.resolve(__dirname, 'src/components/head.html'));
+  files.push(path.resolve(__dirname, 'src/components/end.html'));
 
   // Read files async
   fileHelper.readFiles(files).then(htmlArray => {
@@ -46,12 +46,12 @@ app.get('/build', (req, res) => {
     const uuid = uuidv4();
 
     // Write a new directory based on timestamp
-    fs.mkdir(path.resolve(process.cwd(), `src/public/${uuid}`), err => {
+    fs.mkdir(path.resolve(__dirname, `src/public/${uuid}`), err => {
       if (err) {
         throw err;
       }
 
-      const pathToFile = path.resolve(process.cwd(), `src/public/${uuid}/index.html`);
+      const pathToFile = path.resolve(__dirname, `src/public/${uuid}/index.html`);
 
       // Write a new file with merged html
       fs.writeFile(pathToFile, mergedHtml, (err, data) => {
